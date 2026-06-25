@@ -288,7 +288,7 @@ body.nav-open .nav-toggle span::after  { transform: translate(-50%, 0) rotate(-4
    STATS
    ================================================================= */
 .stats { display: grid; gap: 24px; grid-template-columns: repeat(2, 1fr); }
-@media (min-width: 880px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 760px) { .stats { grid-template-columns: repeat(3, 1fr); } }
 .stat { text-align: center; padding: 16px; }
 .stat b { display: block; font-family: var(--font-head); font-weight: 800; font-size: clamp(2.2rem, 5vw, 3rem); color: #fff; line-height: 1; }
 .stat span { color: #9fb2cb; font-size: .95rem; margin-top: 10px; display: block; }
