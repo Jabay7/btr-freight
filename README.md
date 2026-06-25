@@ -11,8 +11,13 @@ vanilla JS) — no build step, no dependencies, deploys anywhere.
 | `index.html` | Home — hero, services overview, why-us, stats, shipper/driver paths, testimonials |
 | `services.html` | Detailed freight services, equipment & coverage, shipping process |
 | `about.html` | Company story, mission/vision/values, safety & compliance |
-| `careers.html` | **Driver recruitment** — benefits, requirements, hiring process, quick-apply form **and** downloadable official PDF application |
+| `careers.html` | **Driver recruitment** — benefits, requirements, hiring process; offers 3 ways to apply |
+| `apply.html` | **Full online driver application** — the official DOT employment application as a fillable, e-signed web form |
 | `contact.html` | Contact details + **request-a-quote** form |
+
+Plus `robots.txt`, `sitemap.xml`, a branded `404.html`, JSON-LD structured data
+(Organization + a **JobPosting** so the driver role can appear in Google for Jobs),
+and a `tests/` suite.
 
 ```
 assets/
@@ -63,6 +68,22 @@ anything until you connect an endpoint. Pick **one** option:
 
 ### Option B — Google Form (matches the "quick info" form you asked for)
 See **`GOOGLE-FORM-SETUP.md`** for a copy-paste blueprint and two ways to wire it into the site.
+
+### ⚠ Security — the full online application (`apply.html`)
+The full application can collect sensitive data (date of birth, optional SSN). A basic
+Formspree endpoint emails this in plaintext, which is **not ideal for SSNs**. Before
+collecting sensitive data online, use a privacy-compliant pipeline — e.g. Formspree with
+encryption, a dedicated DQF/onboarding provider (Tenstreet, DriverReach, Foley), or your own
+HTTPS backend. The form already marks SSN optional and notes it's verified securely at hire.
+
+## Run the tests
+
+```bash
+uv run --with pytest pytest -q              # full suite (incl. live site checks)
+uv run --with pytest pytest -q -m "not live"   # static checks only (offline)
+```
+The `tests/` suite validates page structure, that every internal link/asset resolves, the PDF
+download, form wiring, SEO files, valid JSON-LD, and that the deployed site serves current content.
 
 ---
 

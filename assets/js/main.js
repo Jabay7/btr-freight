@@ -81,6 +81,47 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* ---------- Repeatable form blocks (online application) ----------
+     A [data-add="key"] button clones the last [data-item] inside the
+     matching [data-repeat="key"] container, clears its inputs, and
+     renumbers the visible block headings.
+  ------------------------------------------------------------------ */
+  function renumber(container) {
+    container.querySelectorAll("[data-item] .repeat-num").forEach(function (n, i) {
+      n.textContent = i + 1;
+    });
+  }
+  document.querySelectorAll("[data-add]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const key = btn.getAttribute("data-add");
+      const container = document.querySelector('[data-repeat="' + key + '"]');
+      if (!container) return;
+      const items = container.querySelectorAll("[data-item]");
+      const last = items[items.length - 1];
+      const clone = last.cloneNode(true);
+      clone.querySelectorAll("input, select, textarea").forEach(function (el) {
+        if (el.type === "checkbox" || el.type === "radio") el.checked = false;
+        else el.value = "";
+      });
+      // keep radio groups independent per cloned block
+      const idx = items.length;
+      clone.querySelectorAll("input[type=radio]").forEach(function (el) {
+        if (el.name) el.name = el.name.replace(/(\s#\d+)?$/, " #" + (idx + 1));
+      });
+      container.appendChild(clone);
+      renumber(container);
+      const firstField = clone.querySelector("input, select, textarea");
+      if (firstField) firstField.focus();
+    });
+  });
+  // initial numbering
+  document.querySelectorAll("[data-repeat]").forEach(renumber);
+
+  /* ---------- Stamp today's date into [data-today] fields ---------- */
+  document.querySelectorAll("[data-today]").forEach(function (el) {
+    if (!el.value) el.value = new Date().toISOString().slice(0, 10);
+  });
+
   /* ---------- AJAX form handling (Formspree-compatible) ----------
      Each [data-form] submits via fetch when its action points to a
      configured endpoint. If the action still contains "REPLACE_", it

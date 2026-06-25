@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Driver Application | BTR Freight Inc.</title>
+  <meta name="description" content="Complete BTR Freight's official DOT driver employment application online. Fast, secure, and mobile-friendly — apply to drive in about 15 minutes." />
+  <meta name="theme-color" content="#0b1f3a" />
+  <link rel="canonical" href="https://jabay7.github.io/btr-freight/apply.html" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#application">Skip to application</a>
+
+  <header class="site-header solid">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="BTR Freight Inc. home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M8 40h26V22H8z" stroke="#0b1f3a" stroke-width="4" stroke-linejoin="round"/><path d="M34 28h11l7 8v4H34z" stroke="#0b1f3a" stroke-width="4" stroke-linejoin="round"/><circle cx="19" cy="44" r="4" fill="#0b1f3a"/><circle cx="43" cy="44" r="4" fill="#0b1f3a"/></svg></span>
+        <span class="brand-text"><span class="brand-name">BTR Freight</span><span class="brand-tag">Driven to Deliver</span></span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="careers.html" class="active">Drive With Us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-cta">
+        <a href="tel:+18005550199" class="header-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke-linejoin="round"/></svg>(800) 555-0199</a>
+        <a href="assets/downloads/BTR-Freight-Driver-Application.pdf" class="btn btn-primary" download>Download PDF</a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <div class="crumbs"><a href="index.html">Home</a><span>/</span> <a href="careers.html">Drive With Us</a><span>/</span> Online Application</div>
+        <h1>Driver employment application</h1>
+        <p>Complete BTR Freight's official DOT driver application right here — no printing required. It takes about 15 minutes. Prefer paper? <a href="assets/downloads/BTR-Freight-Driver-Application.pdf" download style="color:var(--amber)">Download the PDF</a> instead.</p>
+      </div>
+    </section>
+
+    <section class="section" id="application">
+      <div class="container" style="max-width:920px">
+
+        <div class="form-note" style="margin-bottom:28px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>Before you start, have these handy:</strong> your CDL details, employment history for the last 3 years (10 years if you've driven commercially), and any accident/violation dates from the past 3 years. Federal law (FMCSR §391.21) requires this information for driver applicants.</span>
+        </div>
+
+        <div class="form-card">
+          <!--
+            Submissions run in friendly "demo mode" until you set an endpoint.
+            ⚠ This application can collect sensitive data (SSN). Connect a SECURE,
+            privacy-compliant endpoint before going live — see README "Security".
+          -->
+          <form action="https://formspree.io/f/REPLACE_FORM_ID" method="POST" data-form novalidate>
+
+            <!-- 1. Position -->
+            <div class="form-section">
+              <h3><span class="num">1</span> Position applied for</h3>
+              <div class="form-grid cols-2">
+                <div class="field">
+                  <label for="position">Position <span class="req">*</span></label>
+                  <select id="position" name="Position" required>
+                    <option value="" disabled selected>Select…</option>
+                    <option>Company Driver</option><option>Owner-Operator</option><option>Lease Purchase</option><option>Team Driver</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Employment type</label>
+                  <div class="radio-group">
+                    <span class="radio-pill"><input type="radio" id="et1" name="Employment Type" value="Full-time" /><label for="et1">Full-time</label></span>
+                    <span class="radio-pill"><input type="radio" id="et2" name="Employment Type" value="Part-time" /><label for="et2">Part-time</label></span>
+                  </div>
+                </div>
+                <div class="field"><label for="avail">Date available to start</label><input id="avail" name="Date Available" type="date" /></div>
+                <div class="field"><label for="appdate">Date of application</label><input id="appdate" name="Application Date" type="date" data-today readonly /></div>
+              </div>
+            </div>
+
+            <!-- 2. Applicant info -->
+            <div class="form-section">
+              <h3><span class="num">2</span> Applicant information</h3>
+              <div class="form-grid cols-3">
+                <div class="field"><label for="fn">First name <span class="req">*</span></label><input id="fn" name="First Name" type="text" autocomplete="given-name" required /></div>
+                <div class="field"><label for="mn">Middle name</label><input id="mn" name="Middle Name" type="text" autocomplete="additional-name" /></div>
+                <div class="field"><label for="ln">Last name <span class="req">*</span></label><input id="ln" name="Last Name" type="text" autocomplete="family-name" required /></div>
+                <div class="field"><label for="dob">Date of birth <span class="req">*</span></label><input id="dob" name="Date of Birth" type="date" required /></div>
+                <div class="field"><label for="phone">Phone <span class="req">*</span></label><input id="phone" name="Phone" type="tel" autocomplete="tel" required /></div>
+                <div class="field"><label for="email">Email <span class="req">*</span></label><input id="email" name="Email" type="email" autocomplete="email" required /></div>
+                <div class="field">
+                  <label for="ssn">SSN <span class="hint">(optional online — verified securely at hire)</span></label>
+                  <input id="ssn" name="SSN" type="text" inputmode="numeric" autocomplete="off" placeholder="Leave blank if unsure" />
+                </div>
+                <div class="field">
+                  <label>Are you legally eligible to work in the U.S.? <span class="req">*</span></label>
+                  <div class="radio-group">
+                    <span class="radio-pill"><input type="radio" id="elig-y" name="Eligible to Work" value="Yes" required /><label for="elig-y">Yes</label></span>
+                    <span class="radio-pill"><input type="radio" id="elig-n" name="Eligible to Work" value="No" /><label for="elig-n">No</label></span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Are you at least 23 years of age? <span class="req">*</span></label>
+                  <div class="radio-group">
+                    <span class="radio-pill"><input type="radio" id="age-y" name="Over 23" value="Yes" required /><label for="age-y">Yes</label></span>
+                    <span class="radio-pill"><input type="radio" id="age-n" name="Over 23" value="No" /><label for="age-n">No</label></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Address history -->
+            <div class="form-section">
+              <h3><span class="num">3</span> Address history <span class="hint" style="font-weight:400">(list all addresses for the past 3 years)</span></h3>
+              <div data-repeat="address">
+                <div data-item style="border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px;margin-bottom:16px">
+                  <p style="font-family:var(--font-head);font-weight:700;color:var(--ink);margin:0 0 14px">Address <span class="repeat-num">1</span> <span class="hint" style="font-weight:400">(current first)</span></p>
+                  <div class="form-grid cols-2">
+                    <div class="field span-2"><label>Street address <span class="req">*</span></label><input name="Address Street" type="text" autocomplete="street-address" required /></div>
+                    <div class="field"><label>City</label><input name="Address City" type="text" /></div>
+                    <div class="field"><label>State &amp; ZIP</label><input name="Address State/ZIP" type="text" placeholder="ST 00000" /></div>
+                    <div class="field"><label>From (month/year)</label><input name="Address From" type="month" /></div>
+                    <div class="field"><label>To (month/year)</label><input name="Address To" type="month" /></div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-ghost" data-add="address">+ Add previous address</button>
+            </div>
+
+            <!-- 4. License & experience -->
+            <div class="form-section">
+              <h3><span class="num">4</span> Driver's license &amp; experience</h3>
+              <div class="form-grid cols-3">
+                <div class="field"><label for="cdl">CDL number <span class="req">*</span></label><input id="cdl" name="CDL Number" type="text" required /></div>
+                <div class="field"><label for="cdlstate">State of issue <span class="req">*</span></label><input id="cdlstate" name="CDL State" type="text" maxlength="2" placeholder="ST" required /></div>
+                <div class="field">
+                  <label for="cdlclass">Class <span class="req">*</span></label>
+                  <select id="cdlclass" name="CDL Class" required><option value="" disabled selected>Select…</option><option>A</option><option>B</option><option>C</option></select>
+                </div>
+                <div class="field"><label for="cdlexp">Expiration date <span class="req">*</span></label><input id="cdlexp" name="CDL Expiration" type="date" required /></div>
+                <div class="field"><label for="endorse">Endorsements</label><input id="endorse" name="Endorsements" type="text" placeholder="HAZMAT, Tanker, Doubles…" /></div>
+                <div class="field"><label for="yrs">Years of CDL experience <span class="req">*</span></label><input id="yrs" name="Years Experience" type="number" min="0" max="60" required /></div>
+                <div class="field span-2">
+                  <label>Equipment you've operated <span class="hint">(select all)</span></label>
+                  <div class="radio-group">
+                    <label class="check-row" style="border:1.5px solid var(--line-2);padding:10px 14px;border-radius:999px;gap:8px"><input type="checkbox" name="Equipment" value="Dry Van" /> Dry Van</label>
+                    <label class="check-row" style="border:1.5px solid var(--line-2);padding:10px 14px;border-radius:999px;gap:8px"><input type="checkbox" name="Equipment" value="Reefer" /> Reefer</label>
+                    <label class="check-row" style="border:1.5px solid var(--line-2);padding:10px 14px;border-radius:999px;gap:8px"><input type="checkbox" name="Equipment" value="Flatbed" /> Flatbed</label>
+                    <label class="check-row" style="border:1.5px solid var(--line-2);padding:10px 14px;border-radius:999px;gap:8px"><input type="checkbox" name="Equipment" value="Tanker" /> Tanker</label>
+                    <label class="check-row" style="border:1.5px solid var(--line-2);padding:10px 14px;border-radius:999px;gap:8px"><input type="checkbox" name="Equipment" value="Step Deck" /> Step Deck</label>
+                    <label class="check-row" style="border:1.5px solid var(--line-2);padding:10px 14px;border-radius:999px;gap:8px"><input type="checkbox" name="Equipment" value="Doubles/Triples" /> Doubles/Triples</label>
+                  </div>
+                </div>
+                <div class="field span-2">
+                  <label>Has any license, permit, or privilege ever been suspended, revoked, or denied?</label>
+                  <div class="radio-group">
+                    <span class="radio-pill"><input type="radio" id="susp-n" name="License Suspended" value="No" /><label for="susp-n">No</label></span>
+                    <span class="radio-pill"><input type="radio" id="susp-y" name="License Suspended" value="Yes" /><label for="susp-y">Yes</label></span>
+                  </div>
+                </div>
+                <div class="field span-2"><label for="suspx">If yes, explain</label><input id="suspx" name="License Suspended Details" type="text" /></div>
+              </div>
+            </div>
+
+            <!-- 5. Accident record -->
+            <div class="form-section">
+              <h3><span class="num">5</span> Accident record <span class="hint" style="font-weight:400">(past 3 years)</span></h3>
+              <div class="check-row" style="margin-bottom:16px"><input type="checkbox" id="noacc" name="No Accidents" value="No accidents in past 3 years" /><label for="noacc">I have had no DOT-reportable accidents in the past 3 years.</label></div>
+              <div data-repeat="accident">
+                <div data-item style="border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px;margin-bottom:16px">
+                  <p style="font-family:var(--font-head);font-weight:700;color:var(--ink);margin:0 0 14px">Accident <span class="repeat-num">1</span></p>
+                  <div class="form-grid cols-3">
+                    <div class="field"><label>Date</label><input name="Accident Date" type="date" /></div>
+                    <div class="field"><label>Nature (collision, rollover…)</label><input name="Accident Nature" type="text" /></div>
+                    <div class="field"><label>Location</label><input name="Accident Location" type="text" /></div>
+                    <div class="field"><label>Fatalities</label><input name="Accident Fatalities" type="number" min="0" /></div>
+                    <div class="field"><label>Injuries</label><input name="Accident Injuries" type="number" min="0" /></div>
+                    <div class="field"><label>Hazmat spill?</label><select name="Accident Hazmat"><option value="">—</option><option>No</option><option>Yes</option></select></div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-ghost" data-add="accident">+ Add accident</button>
+            </div>
+
+            <!-- 6. Traffic convictions -->
+            <div class="form-section">
+              <h3><span class="num">6</span> Traffic convictions &amp; forfeitures <span class="hint" style="font-weight:400">(past 3 years, other than parking)</span></h3>
+              <div class="check-row" style="margin-bottom:16px"><input type="checkbox" id="noconv" name="No Convictions" value="No convictions in past 3 years" /><label for="noconv">I have had no traffic convictions or forfeitures in the past 3 years.</label></div>
+              <div data-repeat="conviction">
+                <div data-item style="border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px;margin-bottom:16px">
+                  <p style="font-family:var(--font-head);font-weight:700;color:var(--ink);margin:0 0 14px">Conviction <span class="repeat-num">1</span></p>
+                  <div class="form-grid cols-2">
+                    <div class="field"><label>Date</label><input name="Conviction Date" type="date" /></div>
+                    <div class="field"><label>Location</label><input name="Conviction Location" type="text" /></div>
+                    <div class="field"><label>Charge</label><input name="Conviction Charge" type="text" /></div>
+                    <div class="field"><label>Penalty</label><input name="Conviction Penalty" type="text" /></div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-ghost" data-add="conviction">+ Add conviction</button>
+            </div>
+
+            <!-- 7. Employment history -->
+            <div class="form-section">
+              <h3><span class="num">7</span> Employment history <span class="hint" style="font-weight:400">(last 3 years; up to 10 years if you drove commercially — most recent first)</span></h3>
+              <div data-repeat="employer">
+                <div data-item style="border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px;margin-bottom:16px">
+                  <p style="font-family:var(--font-head);font-weight:700;color:var(--ink);margin:0 0 14px">Employer <span class="repeat-num">1</span></p>
+                  <div class="form-grid cols-2">
+                    <div class="field"><label>Company name</label><input name="Employer Name" type="text" /></div>
+                    <div class="field"><label>Phone</label><input name="Employer Phone" type="tel" /></div>
+                    <div class="field span-2"><label>Address</label><input name="Employer Address" type="text" /></div>
+                    <div class="field"><label>Position held</label><input name="Employer Position" type="text" /></div>
+                    <div class="field"><label>Reason for leaving</label><input name="Employer Reason" type="text" /></div>
+                    <div class="field"><label>From</label><input name="Employer From" type="month" /></div>
+                    <div class="field"><label>To</label><input name="Employer To" type="month" /></div>
+                    <div class="field span-2">
+                      <label>Were you subject to the FMCSRs while employed here? <span class="hint">(Federal Motor Carrier Safety Regulations)</span></label>
+                      <div class="radio-group">
+                        <span class="radio-pill"><input type="radio" name="Employer FMCSR" value="Yes" /><label>Yes</label></span>
+                        <span class="radio-pill"><input type="radio" name="Employer FMCSR" value="No" /><label>No</label></span>
+                      </div>
+                    </div>
+                    <div class="field span-2">
+                      <label>Was the job a safety-sensitive function subject to DOT drug &amp; alcohol testing?</label>
+                      <div class="radio-group">
+                        <span class="radio-pill"><input type="radio" name="Employer Safety-Sensitive" value="Yes" /><label>Yes</label></span>
+                        <span class="radio-pill"><input type="radio" name="Employer Safety-Sensitive" value="No" /><label>No</label></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-ghost" data-add="employer">+ Add employer</button>
+            </div>
+
+            <!-- 8. Emergency contact -->
+            <div class="form-section">
+              <h3><span class="num">8</span> Emergency contact</h3>
+              <div class="form-grid cols-3">
+                <div class="field"><label for="ecn">Name</label><input id="ecn" name="Emergency Contact Name" type="text" /></div>
+                <div class="field"><label for="ecr">Relationship</label><input id="ecr" name="Emergency Contact Relationship" type="text" /></div>
+                <div class="field"><label for="ecp">Phone</label><input id="ecp" name="Emergency Contact Phone" type="tel" /></div>
+              </div>
+            </div>
+
+            <!-- 9. Regulatory questions -->
+            <div class="form-section">
+              <h3><span class="num">9</span> FMCSR &amp; DOT questions</h3>
+              <div class="form-grid cols-1" style="gap:18px">
+                <div class="field">
+                  <label>Have you ever tested positive, or refused to test, on a DOT pre-employment drug or alcohol test?</label>
+                  <div class="radio-group">
+                    <span class="radio-pill"><input type="radio" id="dt-n" name="Failed DOT Test" value="No" /><label for="dt-n">No</label></span>
+                    <span class="radio-pill"><input type="radio" id="dt-y" name="Failed DOT Test" value="Yes" /><label for="dt-y">Yes</label></span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Are you currently disqualified from driving a commercial motor vehicle under the FMCSRs?</label>
+                  <div class="radio-group">
+                    <span class="radio-pill"><input type="radio" id="dq-n" name="Disqualified" value="No" /><label for="dq-n">No</label></span>
+                    <span class="radio-pill"><input type="radio" id="dq-y" name="Disqualified" value="Yes" /><label for="dq-y">Yes</label></span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Have you been convicted of driving under the influence in the past 3 years?</label>
+                  <div class="radio-group">
+                    <span class="radio-pill"><input type="radio" id="dui-n" name="DUI" value="No" /><label for="dui-n">No</label></span>
+                    <span class="radio-pill"><input type="radio" id="dui-y" name="DUI" value="Yes" /><label for="dui-y">Yes</label></span>
+                  </div>
+                </div>
+                <div class="field"><label for="explain">Please explain any "Yes" answers above</label><textarea id="explain" name="Regulatory Explanation"></textarea></div>
+              </div>
+            </div>
+
+            <!-- 10. Acknowledgments & signature -->
+            <div class="form-section">
+              <h3><span class="num">10</span> Acknowledgments &amp; signature</h3>
+              <div class="check-row" style="margin-bottom:14px">
+                <input type="checkbox" id="ackhos" name="HOS Acknowledged" value="Yes" required />
+                <label for="ackhos">I have read and understand BTR Freight's <a href="assets/downloads/BTR-Freight-Driver-Application.pdf" download style="color:var(--amber-600);font-weight:600">Hours-of-Service policy</a> (included in the application packet). <span class="req">*</span></label>
+              </div>
+              <div class="check-row" style="margin-bottom:14px">
+                <input type="checkbox" id="ackconsent" name="Background Consent" value="Yes" required />
+                <label for="ackconsent">I authorize BTR Freight Inc. to investigate my background, driving record (MVR), PSP, and prior DOT-regulated employment, and to conduct pre-employment drug &amp; alcohol testing as required by the FMCSRs. <span class="req">*</span></label>
+              </div>
+              <div class="check-row" style="margin-bottom:22px">
+                <input type="checkbox" id="ackcert" name="Certification" value="Yes" required />
+                <label for="ackcert">I certify that all information in this application is true and complete to the best of my knowledge, and I understand that false statements or omissions are grounds for rejection or termination. <span class="req">*</span></label>
+              </div>
+              <div class="form-grid cols-2">
+                <div class="field"><label for="sig">Electronic signature <span class="hint">(type your full legal name)</span> <span class="req">*</span></label><input id="sig" name="Signature" type="text" autocomplete="name" required placeholder="Full legal name" /></div>
+                <div class="field"><label for="sigdate">Date <span class="req">*</span></label><input id="sigdate" name="Signature Date" type="date" data-today required /></div>
+              </div>
+            </div>
+
+            <div class="form-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-linecap="round"/></svg>
+              <span>Your information is sent over a secure (HTTPS) connection and used only for employment consideration. We never sell your data.</span>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="btn btn-primary btn-lg">Submit Application</button>
+              <a href="careers.html" class="btn btn-ghost">Back to careers</a>
+            </div>
+            <div class="form-status" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="brand" aria-label="BTR Freight Inc. home">
+            <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M8 40h26V22H8z" stroke="#0b1f3a" stroke-width="4" stroke-linejoin="round"/><path d="M34 28h11l7 8v4H34z" stroke="#0b1f3a" stroke-width="4" stroke-linejoin="round"/><circle cx="19" cy="44" r="4" fill="#0b1f3a"/><circle cx="43" cy="44" r="4" fill="#0b1f3a"/></svg></span>
+            <span class="brand-text"><span class="brand-name">BTR Freight</span><span class="brand-tag">Driven to Deliver</span></span>
+          </a>
+          <p class="footer-about">Safety-first freight trucking and logistics across the lower 48. Reliable capacity, real-time visibility, and a team that delivers on its promises.</p>
+          <div class="footer-badges"><span class="fb">USDOT #0000000</span><span class="fb">MC #000000</span></div>
+        </div>
+        <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="services.html">Services</a></li><li><a href="careers.html">Drive With Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Full Truckload</a></li><li><a href="services.html">Refrigerated</a></li><li><a href="services.html">Flatbed</a></li><li><a href="services.html">Expedited</a></li></ul></div>
+        <div class="footer-col"><h4>Get in touch</h4><ul class="footer-contact">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke-linejoin="round"/></svg><a href="tel:+18005550199">(800) 555-0199</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><a href="mailto:careers@btrfreight.com">careers@btrfreight.com</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>1234 Logistics Pkwy, Suite 100<br/>Your City, ST 00000</span></li>
+        </ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year">2026</span> BTR Freight Inc. All rights reserved.</span>
+        <span>Equal Opportunity Employer · Safety-first since day one.</span>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
