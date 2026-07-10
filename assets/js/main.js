@@ -118,9 +118,55 @@
   document.querySelectorAll("[data-repeat]").forEach(renumber);
 
   /* ---------- Stamp today's date into [data-today] fields ---------- */
+  const todayISO = new Date().toISOString().slice(0, 10);
   document.querySelectorAll("[data-today]").forEach(function (el) {
-    if (!el.value) el.value = new Date().toISOString().slice(0, 10);
+    if (!el.value) el.value = todayISO;
   });
+
+  /* ---------- Forward-only date fields (pickup / start dates) ----------
+     [data-min-today] prevents picking a date in the past. */
+  document.querySelectorAll("[data-min-today]").forEach(function (el) {
+    el.min = todayISO;
+  });
+
+  /* ---------- Floating UI: back-to-top + mobile call/quote bar ----------
+     Injected here so every page that loads this script gets them without
+     repeating markup. The phone number is read from the header link so
+     there's a single source of truth. */
+  (function floatingUI() {
+    const phoneLink = document.querySelector(".header-phone");
+    const tel = phoneLink ? phoneLink.getAttribute("href") : "tel:+18005550199";
+
+    // Back-to-top
+    const toTop = document.createElement("button");
+    toTop.type = "button";
+    toTop.className = "to-top";
+    toTop.setAttribute("aria-label", "Back to top");
+    toTop.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    toTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    document.body.appendChild(toTop);
+    window.addEventListener(
+      "scroll",
+      function () {
+        toTop.classList.toggle("show", window.scrollY > 600);
+      },
+      { passive: true }
+    );
+
+    // Mobile sticky action bar (Call + Get a Quote)
+    const bar = document.createElement("div");
+    bar.className = "mobile-cta";
+    bar.innerHTML =
+      '<a href="' + tel + '" class="btn btn-dark">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke-linejoin="round"/></svg>Call</a>' +
+      '<a href="contact.html#quote" class="btn btn-primary">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke-linejoin="round"/></svg>Get a Quote</a>';
+    document.body.appendChild(bar);
+    document.body.classList.add("has-mobile-cta");
+  })();
 
   /* ---------- AJAX form handling (Formspree-compatible) ----------
      Each [data-form] submits via fetch when its action points to a

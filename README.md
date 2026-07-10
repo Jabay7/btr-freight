@@ -45,7 +45,7 @@ Search/replace across all `.html` files:
 | `dispatch@btrfreight.com`, `careers@btrfreight.com` | Your real email addresses |
 | `1234 Logistics Pkwy, Suite 100 / Your City, ST 00000` | Your real address |
 | `USDOT #0000000`, `MC #000000` | Your real USDOT and MC numbers |
-| Stats (`10M+`, `98%`, `48`, etc.) | Your real numbers (in the `data-count` attributes) |
+| Stats (`10M+`, `48`, `24/7`, etc.) | Your real numbers (in the `data-count` attributes) |
 | Hero/section photos | Optional — see "Images" below |
 
 > Tip: the testimonials on the home page are illustrative samples. Swap them for real
@@ -107,7 +107,13 @@ You can later point a custom domain (e.g. `btrfreight.com`) at it under the same
 
 ---
 
-## Images
+## Branding & images
+
+The header and footer use the official logo at `assets/img/BTR-OFF.png` (shown on a small white
+"chip" so it stays legible on the dark header and navy footer). To swap the logo, replace that file
+and update the `width`/`height` on the `.brand-logo` `<img>` tags if the new aspect ratio differs.
+The small browser/tab favicon is the crisp vector at `assets/img/favicon.svg` — kept separate because
+a detailed logo with text isn't legible at 16px.
 
 Hero and section photos load from Unsplash CDN URLs. Each sits over a navy gradient, so the
 layout still looks right even if an image is slow or blocked. To use your own photography,
@@ -116,6 +122,8 @@ replace the `https://images.unsplash.com/...` URLs in `index.html`, `services.ht
 
 ## Notes
 
-- Accessible: skip links, ARIA labels, keyboard-friendly nav & accordion, reduced-motion support.
-- SEO: per-page titles, meta descriptions, Open Graph tags.
+- Accessible: skip links, ARIA labels, visible keyboard focus, keyboard-friendly nav & accordion, reduced-motion support.
+- SEO: per-page titles, meta descriptions, Open Graph + Twitter cards on every page, canonical URLs, sitemap, JSON-LD.
+- Conversion touches (no markup needed — added automatically by `main.js`): a sticky **Call / Get-a-Quote** bar on phones, a **back-to-top** button on every page, and smooth anchored scrolling that clears the fixed header. The phone number in the mobile bar is read from the header link, so you only update it once.
+- Forward-looking date fields (pickup / start dates) can't be set in the past.
 - No tracking or third-party scripts beyond Google Fonts and (optional) your chosen form service.
