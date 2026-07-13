@@ -147,10 +147,10 @@ p  { margin: 0 0 1rem; }
 /* Brand — official logo on a white "chip" so it stays legible on any background */
 .brand { display: inline-flex; align-items: center; }
 .brand-logo {
-  height: 58px; width: auto; display: block;
-  background: #fff; padding: 5px 14px; border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(0,0,0,.22);
-  transition: box-shadow .3s ease;
+  height: 74px; width: auto; display: block;
+  background: #fff; padding: 4px 14px; border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.28);
+  transition: box-shadow .3s ease, height .3s ease;
 }
 /* On light (scrolled / interior) headers the chip melts into the white bar */
 .scrolled .brand-logo, .solid .brand-logo { box-shadow: none; }
@@ -337,7 +337,7 @@ body.nav-open .nav-toggle span::after  { transform: translate(-50%, 0) rotate(-4
 .path-card > * { position: relative; z-index: 2; }
 .path-card::after { content:""; position:absolute; inset:0; z-index:1; }
 .path-shippers::before {
-  background: url("https://images.unsplash.com/photo-1605902711622-cfb43c4437b5?q=80&w=1400&auto=format&fit=crop") center/cover;
+  background: url("https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?q=80&w=1400&auto=format&fit=crop") center/cover;
 }
 .path-shippers::after { background: linear-gradient(180deg, rgba(11,31,58,.30), rgba(6,21,40,.92)); }
 .path-drivers::before {
@@ -500,7 +500,7 @@ body.nav-open .nav-toggle span::after  { transform: translate(-50%, 0) rotate(-4
 .site-footer { background: var(--navy-900); color: #8ea3bf; padding-top: 72px; }
 .footer-top { display: grid; gap: 40px; padding-bottom: 52px; }
 @media (min-width: 760px) { .footer-top { grid-template-columns: 1.6fr 1fr 1fr 1.2fr; } }
-.footer-brand .brand-logo { height: 64px; }
+.footer-brand .brand-logo { height: 82px; }
 .footer-about { margin: 18px 0; max-width: 36ch; font-size: .96rem; line-height: 1.7; }
 .footer-social { display: flex; gap: 10px; }
 .footer-social a { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,.07); display: grid; place-items: center; transition: .2s; }
