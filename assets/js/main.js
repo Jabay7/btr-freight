@@ -313,20 +313,22 @@
      true value in a hidden twin input (same name) and render "***-**-1234"
      in the visible field. Only the last 4 stay visible for confirmation. */
   document.querySelectorAll("input[data-ssn-mask]").forEach(function (input) {
-    // Real digits are submitted via a hidden twin; the visible field only
-    // shows the mask, so its digit `pattern` is removed to avoid a false mismatch.
+    // The real digits live in a buffer we fully control; a hidden twin submits
+    // them. The visible field only ever shows the mask, so we can't re-derive
+    // the number from it — instead we intercept keystrokes/paste directly.
     var hidden = document.createElement("input");
     hidden.type = "hidden";
     hidden.name = input.getAttribute("name");
     input.removeAttribute("name");
-    input.removeAttribute("pattern");
+    input.removeAttribute("pattern"); // masked value would fail a digit pattern
     input.setAttribute("autocomplete", "off");
     input.parentNode.insertBefore(hidden, input.nextSibling);
 
-    var digits = ""; // the real, unmasked SSN digits
+    var digits = ""; // the real, unmasked SSN digits (source of truth)
+    var MSG = "Enter your 9-digit Social Security Number";
 
     function group(str, mask) {
-      // Format 9 chars as XXX-XX-XXXX, using `mask` for hidden positions.
+      // Format up to 9 chars as XXX-XX-XXXX; mask all but the last 4 with "*".
       var out = "";
       for (var i = 0; i < str.length; i++) {
         if (i === 3 || i === 5) out += "-";
@@ -335,20 +337,45 @@
       return out;
     }
 
-    function sync() {
-      hidden.value = group(digits, false);            // e.g. 123-45-6789 (submitted)
-      input.value = group(digits, true);              // e.g. ***-**-6789 (displayed)
-      input.setCustomValidity(digits.length === 9 ? "" : "Enter your 9-digit Social Security Number");
+    function render() {
+      hidden.value = group(digits, false);   // 123-45-6789 (submitted)
+      input.value = group(digits, true);      // ***-**-6789 (displayed)
+      input.setCustomValidity(digits.length === 9 ? "" : MSG);
     }
 
-    input.addEventListener("input", function () {
-      var typed = input.value.replace(/\D/g, "");
-      if (typed.length < digits.length) digits = digits.slice(0, typed.length); // backspace
-      else digits = (digits + typed.slice(digits.length)).slice(0, 9);          // new digits
-      sync();
+    // Primary path: manage the buffer from key presses so the masked display
+    // never has to be re-parsed (that's what broke digit recovery before).
+    input.addEventListener("keydown", function (e) {
+      if (e.ctrlKey || e.metaKey || e.altKey) return; // copy/cut/select-all/paste
+      var k = e.key;
+      if (k === "Backspace" || k === "Delete") {
+        digits = digits.slice(0, -1);
+        e.preventDefault(); render();
+      } else if (/^[0-9]$/.test(k)) {
+        if (digits.length < 9) digits += k;
+        e.preventDefault(); render();
+      } else if (k.length === 1) {
+        e.preventDefault(); // block any other printable (letters, dashes, etc.)
+      } // Tab/Arrows/Home/End (length > 1) pass through
     });
-    // Establish initial validity state (empty -> required handles it).
-    input.setCustomValidity("Enter your 9-digit Social Security Number");
+
+    // Fallback for paste / autofill / mobile IME that bypass keydown. These
+    // deliver an unmasked value (no "*"), so it's safe to re-read the digits.
+    input.addEventListener("input", function () {
+      if (input.value.indexOf("*") === -1) {
+        digits = input.value.replace(/\D/g, "").slice(0, 9);
+      }
+      render();
+    });
+    input.addEventListener("paste", function (e) {
+      e.preventDefault();
+      var cb = e.clipboardData || window.clipboardData;
+      var t = cb ? cb.getData("text") : "";
+      digits = (digits + t.replace(/\D/g, "")).slice(0, 9);
+      render();
+    });
+
+    input.setCustomValidity(MSG); // invalid until 9 digits (required covers empty)
   });
 
   /* ---------- AJAX form handling (Formspree-compatible) ----------
