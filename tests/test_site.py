@@ -197,24 +197,29 @@ def test_pdf_download_link(page):
 # Forms
 # --------------------------------------------------------------------------- #
 def test_forms_wired():
-    for page in ("careers.html", "contact.html", "apply.html"):
+    for page in ("contact.html", "apply.html"):
         p = parse(page)
         assert p.data_forms >= 1, f"{page}: no data-form form"
         assert p.has_form_status, f"{page}: no .form-status element"
         assert 'action="' in text(page), f"{page}: form missing action"
 
 
-def test_quick_apply_required_fields():
+def test_careers_uses_online_application():
+    """Quick-apply was removed; careers routes drivers to the step-by-step
+    online application (still offering the PDF)."""
     p = parse("careers.html")
-    for needed in ("First Name", "Last Name", "Email", "Phone", "Consent"):
-        assert needed in p.required_names, f"careers quick form missing required '{needed}'"
+    t = text("careers.html")
+    assert "<form" not in t, "careers.html should no longer host a form (quick apply removed)"
+    assert 'id="quick-form"' not in t, "stale quick-apply form remains"
+    assert "apply.html" in p.links, "careers.html must link to the online application"
 
 
 def test_full_application_completeness():
     p = parse("apply.html")
     t = text("apply.html")
     assert t.count('class="form-section"') >= 10, "apply.html should have 10 sections"
-    for needed in ("First Name", "Last Name", "CDL Number", "Signature"):
+    assert "data-wizard" in t, "apply.html should be a step-by-step wizard"
+    for needed in ("First Name", "Last Name", "CDL Number", "Signature", "SSN"):
         assert needed in p.required_names, f"apply.html missing required '{needed}'"
     # certification & consent checkboxes
     assert "Certification" in p.all_input_names

@@ -65,7 +65,7 @@
             ⚠ This application can collect sensitive data (SSN). Connect a SECURE,
             privacy-compliant endpoint before going live — see README "Security".
           -->
-          <form action="https://formspree.io/f/REPLACE_FORM_ID" method="POST" data-form novalidate>
+          <form action="https://formspree.io/f/REPLACE_FORM_ID" method="POST" data-form data-wizard novalidate>
 
             <!-- 1. Position -->
             <div class="form-section">
@@ -101,8 +101,8 @@
                 <div class="field"><label for="phone">Phone <span class="req">*</span></label><input id="phone" name="Phone" type="tel" autocomplete="tel" required /></div>
                 <div class="field"><label for="email">Email <span class="req">*</span></label><input id="email" name="Email" type="email" autocomplete="email" required /></div>
                 <div class="field">
-                  <label for="ssn">SSN <span class="hint">(optional online — verified securely at hire)</span></label>
-                  <input id="ssn" name="SSN" type="text" inputmode="numeric" autocomplete="off" placeholder="Leave blank if unsure" />
+                  <label for="ssn">Social Security Number <span class="req">*</span> <span class="hint">(secure — used only for DOT verification)</span></label>
+                  <input id="ssn" name="SSN" type="text" inputmode="numeric" autocomplete="off" required pattern="\d{3}-?\d{2}-?\d{4}" maxlength="11" placeholder="XXX-XX-XXXX" title="Enter your 9-digit SSN, e.g. 123-45-6789" />
                 </div>
                 <div class="field">
                   <label>Are you legally eligible to work in the U.S.? <span class="req">*</span></label>
@@ -164,9 +164,9 @@
                   </div>
                 </div>
                 <div class="field span-2">
-                  <label>Has any license, permit, or privilege ever been suspended, revoked, or denied?</label>
+                  <label>Has any license, permit, or privilege ever been suspended, revoked, or denied? <span class="req">*</span></label>
                   <div class="radio-group">
-                    <span class="radio-pill"><input type="radio" id="susp-n" name="License Suspended" value="No" /><label for="susp-n">No</label></span>
+                    <span class="radio-pill"><input type="radio" id="susp-n" name="License Suspended" value="No" required /><label for="susp-n">No</label></span>
                     <span class="radio-pill"><input type="radio" id="susp-y" name="License Suspended" value="Yes" /><label for="susp-y">Yes</label></span>
                   </div>
                 </div>
@@ -261,23 +261,23 @@
               <h3><span class="num">9</span> FMCSR &amp; DOT questions</h3>
               <div class="form-grid cols-1" style="gap:18px">
                 <div class="field">
-                  <label>Have you ever tested positive, or refused to test, on a DOT pre-employment drug or alcohol test?</label>
+                  <label>Have you ever tested positive, or refused to test, on a DOT pre-employment drug or alcohol test? <span class="req">*</span></label>
                   <div class="radio-group">
-                    <span class="radio-pill"><input type="radio" id="dt-n" name="Failed DOT Test" value="No" /><label for="dt-n">No</label></span>
+                    <span class="radio-pill"><input type="radio" id="dt-n" name="Failed DOT Test" value="No" required /><label for="dt-n">No</label></span>
                     <span class="radio-pill"><input type="radio" id="dt-y" name="Failed DOT Test" value="Yes" /><label for="dt-y">Yes</label></span>
                   </div>
                 </div>
                 <div class="field">
-                  <label>Are you currently disqualified from driving a commercial motor vehicle under the FMCSRs?</label>
+                  <label>Are you currently disqualified from driving a commercial motor vehicle under the FMCSRs? <span class="req">*</span></label>
                   <div class="radio-group">
-                    <span class="radio-pill"><input type="radio" id="dq-n" name="Disqualified" value="No" /><label for="dq-n">No</label></span>
+                    <span class="radio-pill"><input type="radio" id="dq-n" name="Disqualified" value="No" required /><label for="dq-n">No</label></span>
                     <span class="radio-pill"><input type="radio" id="dq-y" name="Disqualified" value="Yes" /><label for="dq-y">Yes</label></span>
                   </div>
                 </div>
                 <div class="field">
-                  <label>Have you been convicted of driving under the influence in the past 3 years?</label>
+                  <label>Have you been convicted of driving under the influence in the past 3 years? <span class="req">*</span></label>
                   <div class="radio-group">
-                    <span class="radio-pill"><input type="radio" id="dui-n" name="DUI" value="No" /><label for="dui-n">No</label></span>
+                    <span class="radio-pill"><input type="radio" id="dui-n" name="DUI" value="No" required /><label for="dui-n">No</label></span>
                     <span class="radio-pill"><input type="radio" id="dui-y" name="DUI" value="Yes" /><label for="dui-y">Yes</label></span>
                   </div>
                 </div>

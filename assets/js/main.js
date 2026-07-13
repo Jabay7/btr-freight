@@ -168,6 +168,97 @@
     document.body.classList.add("has-mobile-cta");
   })();
 
+  /* ---------- Multi-step application wizard ----------
+     Turns any form[data-wizard] into a guided, one-section-at-a-time flow.
+     The applicant can't advance until every required field in the current
+     .form-section is valid. Without JS the form degrades to one long page,
+     so it still works. ------------------------------------------------- */
+  document.querySelectorAll("form[data-wizard]").forEach(function (form) {
+    var steps = Array.prototype.slice.call(form.querySelectorAll(".form-section"));
+    if (steps.length < 2) return;
+    var submitBlock = form.querySelector(".form-submit");
+    var secureNote = form.querySelector(".form-note");
+
+    // Progress indicator (inserted above the first step)
+    var prog = document.createElement("div");
+    prog.className = "form-steps";
+    prog.innerHTML =
+      '<div class="form-steps-bar"><span></span></div>' +
+      '<div class="form-steps-meta"><span class="cur"></span><span class="count"></span></div>';
+    form.insertBefore(prog, steps[0]);
+    var bar = prog.querySelector(".form-steps-bar > span");
+    var curLabel = prog.querySelector(".cur");
+    var countLabel = prog.querySelector(".count");
+
+    // Back / Next nav (inserted before the closing note + submit block)
+    var nav = document.createElement("div");
+    nav.className = "wizard-nav";
+    var backBtn = document.createElement("button");
+    backBtn.type = "button";
+    backBtn.className = "btn btn-ghost";
+    backBtn.innerHTML = "&larr; Back";
+    var nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.className = "btn btn-primary btn-lg";
+    nextBtn.innerHTML = "Next &rarr;";
+    var spacer = document.createElement("span");
+    spacer.className = "spacer";
+    nav.appendChild(backBtn);
+    nav.appendChild(spacer);
+    nav.appendChild(nextBtn);
+    form.insertBefore(nav, secureNote || submitBlock);
+
+    var idx = 0;
+
+    function render(scroll) {
+      var total = steps.length;
+      var last = idx === total - 1;
+      steps.forEach(function (s, i) { s.style.display = i === idx ? "" : "none"; });
+      bar.style.width = ((idx + 1) / total * 100) + "%";
+      var h3 = steps[idx].querySelector("h3");
+      curLabel.textContent = h3 ? h3.textContent.replace(/^\s*\d+\s*/, "").trim() : "";
+      countLabel.textContent = "Step " + (idx + 1) + " of " + total;
+      backBtn.style.visibility = idx === 0 ? "hidden" : "visible";
+      nextBtn.style.display = last ? "none" : "";
+      if (submitBlock) submitBlock.style.display = last ? "" : "none";
+      if (secureNote) secureNote.style.display = last ? "" : "none";
+      if (scroll) {
+        var y = form.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }
+
+    // Validate every field in the current step; report the first invalid one.
+    function stepValid() {
+      var fields = steps[idx].querySelectorAll("input, select, textarea");
+      for (var i = 0; i < fields.length; i++) {
+        var f = fields[i];
+        if (f.disabled || f.type === "hidden") continue;
+        if (!f.checkValidity()) { f.reportValidity(); return false; }
+      }
+      return true;
+    }
+
+    nextBtn.addEventListener("click", function () {
+      if (stepValid() && idx < steps.length - 1) { idx++; render(true); }
+    });
+    backBtn.addEventListener("click", function () {
+      if (idx > 0) { idx--; render(true); }
+    });
+
+    // Block Enter-key / accidental submits until the final step (this runs
+    // before the AJAX submit handler below, which is registered later).
+    form.addEventListener("submit", function (e) {
+      if (idx < steps.length - 1) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if (stepValid()) { idx++; render(true); }
+      }
+    });
+
+    render(false);
+  });
+
   /* ---------- AJAX form handling (Formspree-compatible) ----------
      Each [data-form] submits via fetch when its action points to a
      configured endpoint. If the action still contains "REPLACE_", it

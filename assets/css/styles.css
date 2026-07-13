@@ -458,6 +458,17 @@ body.nav-open .nav-toggle span::after  { transform: translate(-50%, 0) rotate(-4
 .form-note svg { width: 20px; height: 20px; color: var(--amber-600); flex: none; }
 .form-submit { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 8px; }
 
+/* Multi-step application wizard (progressive enhancement) */
+.form-steps { margin-bottom: 30px; }
+.form-steps-bar { height: 8px; background: var(--surface-3); border-radius: 999px; overflow: hidden; }
+.form-steps-bar > span { display: block; height: 100%; width: 10%; background: var(--amber); border-radius: 999px; transition: width .35s ease; }
+.form-steps-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; margin-top: 12px; }
+.form-steps-meta .cur { font-family: var(--font-head); font-weight: 700; color: var(--ink); font-size: 1.1rem; }
+.form-steps-meta .count { color: var(--body); font-size: .9rem; font-weight: 600; white-space: nowrap; }
+.wizard-nav { display: flex; align-items: center; gap: 14px; margin-top: 28px; }
+.wizard-nav .spacer { flex: 1; }
+@media (max-width: 520px) { .wizard-nav .btn { flex: 1; justify-content: center; } }
+
 .form-status { display: none; padding: 16px 18px; border-radius: var(--radius-sm); font-weight: 600; margin-top: 8px; }
 .form-status.show { display: block; }
 .form-status.ok { background: #e8f7ee; color: #1c7a45; border: 1px solid #b7e6c8; }
