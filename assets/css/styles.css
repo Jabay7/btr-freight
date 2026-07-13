@@ -41,7 +41,7 @@
   --font-head: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
 
-  --header-h: 86px;
+  --header-h: 96px;
 }
 
 /* ---------- Reset ---------- */
@@ -147,9 +147,9 @@ p  { margin: 0 0 1rem; }
 /* Brand — official logo on a white "chip" so it stays legible on any background */
 .brand { display: inline-flex; align-items: center; }
 .brand-logo {
-  height: 74px; width: auto; display: block;
-  background: #fff; padding: 4px 14px; border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.28);
+  height: 82px; width: auto; display: block;
+  background: #fff; padding: 3px 18px; border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.30);
   transition: box-shadow .3s ease, height .3s ease;
 }
 /* On light (scrolled / interior) headers the chip melts into the white bar */
@@ -282,6 +282,20 @@ body.nav-open .nav-toggle span::after  { transform: translate(-50%, 0) rotate(-4
 }
 .service-card .more svg { width: 16px; height: 16px; transition: transform .2s; }
 .service-card:hover .more svg { transform: translateX(4px); }
+
+/* Home "what we haul" — balanced 2x2 of horizontal service cards */
+.services-grid { max-width: 1000px; margin-inline: auto; }
+@media (min-width: 720px) {
+  .services-grid .service-card {
+    display: grid; column-gap: 22px; align-content: start;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "icon title" "icon desc" "icon link";
+  }
+  .services-grid .service-card .icon-badge { grid-area: icon; margin-bottom: 0; align-self: start; }
+  .services-grid .service-card h3  { grid-area: title; margin-top: 2px; }
+  .services-grid .service-card p   { grid-area: desc; }
+  .services-grid .service-card .more { grid-area: link; }
+}
 
 /* =================================================================
    STATS
@@ -500,7 +514,7 @@ body.nav-open .nav-toggle span::after  { transform: translate(-50%, 0) rotate(-4
 .site-footer { background: var(--navy-900); color: #8ea3bf; padding-top: 72px; }
 .footer-top { display: grid; gap: 40px; padding-bottom: 52px; }
 @media (min-width: 760px) { .footer-top { grid-template-columns: 1.6fr 1fr 1fr 1.2fr; } }
-.footer-brand .brand-logo { height: 82px; }
+.footer-brand .brand-logo { height: 92px; }
 .footer-about { margin: 18px 0; max-width: 36ch; font-size: .96rem; line-height: 1.7; }
 .footer-social { display: flex; gap: 10px; }
 .footer-social a { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,.07); display: grid; place-items: center; transition: .2s; }
@@ -556,6 +570,8 @@ body.nav-open .nav-toggle span::after  { transform: translate(-50%, 0) rotate(-4
 
 .mobile-cta { display: none; }
 @media (max-width: 640px) {
+  :root { --header-h: 78px; }
+  .brand-logo { height: 62px; padding: 3px 14px; }
   .mobile-cta {
     display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 95;
