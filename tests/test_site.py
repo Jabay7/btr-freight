@@ -219,8 +219,13 @@ def test_full_application_completeness():
     t = text("apply.html")
     assert t.count('class="form-section"') >= 10, "apply.html should have 10 sections"
     assert "data-wizard" in t, "apply.html should be a step-by-step wizard"
-    for needed in ("First Name", "Last Name", "CDL Number", "Signature", "SSN"):
+    for needed in ("First Name", "Last Name", "CDL Number", "Signature", "SSN",
+                   "Employer Name", "Employer From", "Employer To",
+                   "10-Year History Certified"):
         assert needed in p.required_names, f"apply.html missing required '{needed}'"
+    # enforce 3-year minimum verifiable CDL experience
+    assert re.search(r'name="Years Experience"[^>]*min="3"', t), \
+        "apply.html should require min 3 years of CDL experience"
     # certification & consent checkboxes
     assert "Certification" in p.all_input_names
     assert "Background Consent" in p.all_input_names

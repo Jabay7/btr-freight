@@ -56,7 +56,7 @@
 
         <div class="form-note" style="margin-bottom:28px">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span><strong>Before you start, have these handy:</strong> your CDL details, employment history for the last 3 years (10 years if you've driven commercially), and any accident/violation dates from the past 3 years. Federal law (FMCSR §391.21) requires this information for driver applicants.</span>
+          <span><strong>Before you start, have these handy:</strong> your CDL details, a complete <strong>10-year employment history</strong> (required for DOT-regulated CDL positions), and any accident/violation dates from the past 3 years. Our driving positions require at least <strong>3 years of verifiable CDL experience</strong>. Federal law (FMCSR §391.21) requires this information for driver applicants.</span>
         </div>
 
         <div class="form-card">
@@ -151,7 +151,7 @@
                 </div>
                 <div class="field"><label for="cdlexp">Expiration date <span class="req">*</span></label><input id="cdlexp" name="CDL Expiration" type="date" required /></div>
                 <div class="field"><label for="endorse">Endorsements</label><input id="endorse" name="Endorsements" type="text" placeholder="HAZMAT, Tanker, Doubles…" /></div>
-                <div class="field"><label for="yrs">Years of CDL experience <span class="req">*</span></label><input id="yrs" name="Years Experience" type="number" min="0" max="60" required /></div>
+                <div class="field"><label for="yrs">Years of verifiable CDL experience <span class="req">*</span> <span class="hint">(3 yrs min)</span></label><input id="yrs" name="Years Experience" type="number" min="3" max="60" required title="Our driving positions require at least 3 years of verifiable DOT-regulated CDL experience" /></div>
                 <div class="field span-2">
                   <label>Equipment you've operated <span class="hint">(select all)</span></label>
                   <div class="radio-group">
@@ -214,29 +214,29 @@
 
             <!-- 7. Employment history -->
             <div class="form-section">
-              <h3><span class="num">7</span> Employment history <span class="hint" style="font-weight:400">(last 3 years; up to 10 years if you drove commercially — most recent first)</span></h3>
+              <h3><span class="num">7</span> Employment history <span class="hint" style="font-weight:400">(complete 10-year history for DOT-regulated CDL positions — most recent first; account for any gaps)</span></h3>
               <div data-repeat="employer">
                 <div data-item style="border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px;margin-bottom:16px">
                   <p style="font-family:var(--font-head);font-weight:700;color:var(--ink);margin:0 0 14px">Employer <span class="repeat-num">1</span></p>
                   <div class="form-grid cols-2">
-                    <div class="field"><label>Company name</label><input name="Employer Name" type="text" /></div>
+                    <div class="field"><label>Company name <span class="req">*</span></label><input name="Employer Name" type="text" required /></div>
                     <div class="field"><label>Phone</label><input name="Employer Phone" type="tel" /></div>
-                    <div class="field span-2"><label>Address</label><input name="Employer Address" type="text" /></div>
-                    <div class="field"><label>Position held</label><input name="Employer Position" type="text" /></div>
+                    <div class="field span-2"><label>Address <span class="req">*</span></label><input name="Employer Address" type="text" required /></div>
+                    <div class="field"><label>Position held <span class="req">*</span></label><input name="Employer Position" type="text" required /></div>
                     <div class="field"><label>Reason for leaving</label><input name="Employer Reason" type="text" /></div>
-                    <div class="field"><label>From</label><input name="Employer From" type="month" /></div>
-                    <div class="field"><label>To</label><input name="Employer To" type="month" /></div>
+                    <div class="field"><label>From <span class="req">*</span></label><input name="Employer From" type="month" required /></div>
+                    <div class="field"><label>To <span class="req">*</span> <span class="hint">(current month if still here)</span></label><input name="Employer To" type="month" required /></div>
                     <div class="field span-2">
-                      <label>Were you subject to the FMCSRs while employed here? <span class="hint">(Federal Motor Carrier Safety Regulations)</span></label>
+                      <label>Were you subject to the FMCSRs while employed here? <span class="hint">(Federal Motor Carrier Safety Regulations)</span> <span class="req">*</span></label>
                       <div class="radio-group">
-                        <span class="radio-pill"><input type="radio" name="Employer FMCSR" value="Yes" /><label>Yes</label></span>
+                        <span class="radio-pill"><input type="radio" name="Employer FMCSR" value="Yes" required /><label>Yes</label></span>
                         <span class="radio-pill"><input type="radio" name="Employer FMCSR" value="No" /><label>No</label></span>
                       </div>
                     </div>
                     <div class="field span-2">
-                      <label>Was the job a safety-sensitive function subject to DOT drug &amp; alcohol testing?</label>
+                      <label>Was the job a safety-sensitive function subject to DOT drug &amp; alcohol testing? <span class="req">*</span></label>
                       <div class="radio-group">
-                        <span class="radio-pill"><input type="radio" name="Employer Safety-Sensitive" value="Yes" /><label>Yes</label></span>
+                        <span class="radio-pill"><input type="radio" name="Employer Safety-Sensitive" value="Yes" required /><label>Yes</label></span>
                         <span class="radio-pill"><input type="radio" name="Employer Safety-Sensitive" value="No" /><label>No</label></span>
                       </div>
                     </div>
@@ -244,6 +244,10 @@
                 </div>
               </div>
               <button type="button" class="btn btn-ghost" data-add="employer">+ Add employer</button>
+              <div class="check-row" style="margin-top:18px">
+                <input type="checkbox" id="emp10" name="10-Year History Certified" value="Yes" required />
+                <label for="emp10">I certify I have listed my complete employment history for the past 10 years — including every DOT-regulated (CMV) employer — with at least 3 years of verifiable CDL driving experience, and have accounted for any gaps. <span class="req">*</span></label>
+              </div>
             </div>
 
             <!-- 8. Emergency contact -->
