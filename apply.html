@@ -101,8 +101,8 @@
                 <div class="field"><label for="phone">Phone <span class="req">*</span></label><input id="phone" name="Phone" type="tel" autocomplete="tel" required /></div>
                 <div class="field"><label for="email">Email <span class="req">*</span></label><input id="email" name="Email" type="email" autocomplete="email" required /></div>
                 <div class="field">
-                  <label for="ssn">Social Security Number <span class="req">*</span> <span class="hint">(secure — used only for DOT verification)</span></label>
-                  <input id="ssn" name="SSN" type="text" inputmode="numeric" autocomplete="off" required pattern="\d{3}-?\d{2}-?\d{4}" maxlength="11" placeholder="XXX-XX-XXXX" title="Enter your 9-digit SSN, e.g. 123-45-6789" />
+                  <label for="ssn">Social Security Number <span class="req">*</span> <span class="hint">(secure — masked as you type)</span></label>
+                  <input id="ssn" name="SSN" type="text" inputmode="numeric" autocomplete="off" required data-ssn-mask pattern="\d{3}-?\d{2}-?\d{4}" maxlength="11" placeholder="***-**-****" title="Enter your 9-digit Social Security Number" />
                 </div>
                 <div class="field">
                   <label>Are you legally eligible to work in the U.S.? <span class="req">*</span></label>
@@ -129,8 +129,8 @@
                   <p style="font-family:var(--font-head);font-weight:700;color:var(--ink);margin:0 0 14px">Address <span class="repeat-num">1</span> <span class="hint" style="font-weight:400">(current first)</span></p>
                   <div class="form-grid cols-2">
                     <div class="field span-2"><label>Street address <span class="req">*</span></label><input name="Address Street" type="text" autocomplete="street-address" required /></div>
-                    <div class="field"><label>City</label><input name="Address City" type="text" /></div>
-                    <div class="field"><label>State &amp; ZIP</label><input name="Address State/ZIP" type="text" placeholder="ST 00000" /></div>
+                    <div class="field"><label>City <span class="req">*</span></label><input name="Address City" type="text" required /></div>
+                    <div class="field"><label>State &amp; ZIP <span class="req">*</span></label><input name="Address State/ZIP" type="text" placeholder="ST 00000" required /></div>
                     <div class="field"><label>From (month/year)</label><input name="Address From" type="month" /></div>
                     <div class="field"><label>To (month/year)</label><input name="Address To" type="month" /></div>
                   </div>
@@ -153,8 +153,8 @@
                 <div class="field"><label for="endorse">Endorsements</label><input id="endorse" name="Endorsements" type="text" placeholder="HAZMAT, Tanker, Doubles…" /></div>
                 <div class="field"><label for="yrs">Years of verifiable CDL experience <span class="req">*</span> <span class="hint">(3 yrs min)</span></label><input id="yrs" name="Years Experience" type="number" min="3" max="60" required title="Our driving positions require at least 3 years of verifiable DOT-regulated CDL experience" /></div>
                 <div class="field span-2">
-                  <label>Equipment you've operated <span class="hint">(select all)</span></label>
-                  <div class="radio-group">
+                  <label>Equipment you've operated <span class="req">*</span> <span class="hint">(select all that apply)</span></label>
+                  <div class="radio-group" data-require-one>
                     <label class="check-row" style="border:1.5px solid var(--line-2);padding:10px 14px;border-radius:999px;gap:8px"><input type="checkbox" name="Equipment" value="Dry Van" /> Dry Van</label>
                     <label class="check-row" style="border:1.5px solid var(--line-2);padding:10px 14px;border-radius:999px;gap:8px"><input type="checkbox" name="Equipment" value="Reefer" /> Reefer</label>
                     <label class="check-row" style="border:1.5px solid var(--line-2);padding:10px 14px;border-radius:999px;gap:8px"><input type="checkbox" name="Equipment" value="Flatbed" /> Flatbed</label>
@@ -175,7 +175,7 @@
             </div>
 
             <!-- 5. Accident record -->
-            <div class="form-section">
+            <div class="form-section" data-declare="accident">
               <h3><span class="num">5</span> Accident record <span class="hint" style="font-weight:400">(past 3 years)</span></h3>
               <div class="check-row" style="margin-bottom:16px"><input type="checkbox" id="noacc" name="No Accidents" value="No accidents in past 3 years" /><label for="noacc">I have had no DOT-reportable accidents in the past 3 years.</label></div>
               <div data-repeat="accident">
@@ -195,7 +195,7 @@
             </div>
 
             <!-- 6. Traffic convictions -->
-            <div class="form-section">
+            <div class="form-section" data-declare="conviction">
               <h3><span class="num">6</span> Traffic convictions &amp; forfeitures <span class="hint" style="font-weight:400">(past 3 years, other than parking)</span></h3>
               <div class="check-row" style="margin-bottom:16px"><input type="checkbox" id="noconv" name="No Convictions" value="No convictions in past 3 years" /><label for="noconv">I have had no traffic convictions or forfeitures in the past 3 years.</label></div>
               <div data-repeat="conviction">
@@ -254,9 +254,9 @@
             <div class="form-section">
               <h3><span class="num">8</span> Emergency contact</h3>
               <div class="form-grid cols-3">
-                <div class="field"><label for="ecn">Name</label><input id="ecn" name="Emergency Contact Name" type="text" /></div>
+                <div class="field"><label for="ecn">Name <span class="req">*</span></label><input id="ecn" name="Emergency Contact Name" type="text" required /></div>
                 <div class="field"><label for="ecr">Relationship</label><input id="ecr" name="Emergency Contact Relationship" type="text" /></div>
-                <div class="field"><label for="ecp">Phone</label><input id="ecp" name="Emergency Contact Phone" type="tel" /></div>
+                <div class="field"><label for="ecp">Phone <span class="req">*</span></label><input id="ecp" name="Emergency Contact Phone" type="tel" required /></div>
               </div>
             </div>
 

@@ -468,6 +468,8 @@ body.nav-open .nav-toggle span::after  { transform: translate(-50%, 0) rotate(-4
 .wizard-nav { display: flex; align-items: center; gap: 14px; margin-top: 28px; }
 .wizard-nav .spacer { flex: 1; }
 @media (max-width: 520px) { .wizard-nav .btn { flex: 1; justify-content: center; } }
+.group-error { color: #b13030; font-size: .85rem; font-weight: 600; margin: 8px 0 0; }
+.group-error:empty { display: none; }
 
 .form-status { display: none; padding: 16px 18px; border-radius: var(--radius-sm); font-weight: 600; margin-top: 8px; }
 .form-status.show { display: block; }

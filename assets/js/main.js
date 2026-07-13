@@ -228,14 +228,63 @@
       }
     }
 
-    // Validate every field in the current step; report the first invalid one.
+    // Small inline error helper for group-level rules (checkboxes).
+    function groupError(anchor, msg) {
+      var holder = anchor.closest(".field") || anchor;
+      var err = holder.querySelector(".group-error");
+      if (!err) {
+        err = document.createElement("p");
+        err.className = "group-error";
+        holder.appendChild(err);
+      }
+      err.textContent = msg;
+      anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    function clearGroupError(scope) {
+      scope.querySelectorAll(".group-error").forEach(function (e) { e.textContent = ""; });
+    }
+
+    // Validate the current step: native field validity + custom checkbox rules.
     function stepValid() {
-      var fields = steps[idx].querySelectorAll("input, select, textarea");
+      var step = steps[idx];
+      clearGroupError(step);
+
+      // 1) Native required fields (inputs/selects/textareas, incl. required checkboxes).
+      var fields = step.querySelectorAll("input, select, textarea");
       for (var i = 0; i < fields.length; i++) {
         var f = fields[i];
         if (f.disabled || f.type === "hidden") continue;
         if (!f.checkValidity()) { f.reportValidity(); return false; }
       }
+
+      // 2) "Select at least one" checkbox groups (e.g. equipment operated).
+      var groups = step.querySelectorAll("[data-require-one]");
+      for (var g = 0; g < groups.length; g++) {
+        var boxes = groups[g].querySelectorAll('input[type="checkbox"]');
+        var anyChecked = Array.prototype.some.call(boxes, function (b) { return b.checked; });
+        if (boxes.length && !anyChecked) {
+          groupError(groups[g], "Please select at least one option.");
+          return false;
+        }
+      }
+
+      // 3) Declaration steps (accident / conviction): the applicant must either
+      //    check the "none in the past 3 years" box OR list at least one entry.
+      if (step.hasAttribute("data-declare")) {
+        var noBox = step.querySelector('.check-row input[type="checkbox"]');
+        var entries = step.querySelectorAll("[data-item]");
+        var hasEntry = Array.prototype.some.call(entries, function (item) {
+          return Array.prototype.some.call(
+            item.querySelectorAll("input, select, textarea"),
+            function (el) { return el.value && el.value.trim() !== ""; }
+          );
+        });
+        if (noBox && !noBox.checked && !hasEntry) {
+          groupError(noBox, "Check the box to confirm none, or add at least one entry below.");
+          return false;
+        }
+      }
+
       return true;
     }
 
@@ -257,6 +306,49 @@
     });
 
     render(false);
+  });
+
+  /* ---------- SSN mask ----------
+     Shows asterisks while typing but submits the real 9 digits. We keep the
+     true value in a hidden twin input (same name) and render "***-**-1234"
+     in the visible field. Only the last 4 stay visible for confirmation. */
+  document.querySelectorAll("input[data-ssn-mask]").forEach(function (input) {
+    // Real digits are submitted via a hidden twin; the visible field only
+    // shows the mask, so its digit `pattern` is removed to avoid a false mismatch.
+    var hidden = document.createElement("input");
+    hidden.type = "hidden";
+    hidden.name = input.getAttribute("name");
+    input.removeAttribute("name");
+    input.removeAttribute("pattern");
+    input.setAttribute("autocomplete", "off");
+    input.parentNode.insertBefore(hidden, input.nextSibling);
+
+    var digits = ""; // the real, unmasked SSN digits
+
+    function group(str, mask) {
+      // Format 9 chars as XXX-XX-XXXX, using `mask` for hidden positions.
+      var out = "";
+      for (var i = 0; i < str.length; i++) {
+        if (i === 3 || i === 5) out += "-";
+        out += mask && i < str.length - 4 ? "*" : str[i];
+      }
+      return out;
+    }
+
+    function sync() {
+      hidden.value = group(digits, false);            // e.g. 123-45-6789 (submitted)
+      input.value = group(digits, true);              // e.g. ***-**-6789 (displayed)
+      input.setCustomValidity(digits.length === 9 ? "" : "Enter your 9-digit Social Security Number");
+    }
+
+    input.addEventListener("input", function () {
+      var typed = input.value.replace(/\D/g, "");
+      if (typed.length < digits.length) digits = digits.slice(0, typed.length); // backspace
+      else digits = (digits + typed.slice(digits.length)).slice(0, 9);          // new digits
+      sync();
+    });
+    // Establish initial validity state (empty -> required handles it).
+    input.setCustomValidity("Enter your 9-digit Social Security Number");
   });
 
   /* ---------- AJAX form handling (Formspree-compatible) ----------
