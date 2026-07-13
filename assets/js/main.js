@@ -135,7 +135,7 @@
      there's a single source of truth. */
   (function floatingUI() {
     const phoneLink = document.querySelector(".header-phone");
-    const tel = phoneLink ? phoneLink.getAttribute("href") : "tel:+18005550199";
+    const tel = phoneLink ? phoneLink.getAttribute("href") : "tel:+12244775782";
 
     // Back-to-top
     const toTop = document.createElement("button");
