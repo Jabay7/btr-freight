@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jabay7.github.io/btr-freight/sitemap.xml
+Sitemap: https://btrfreight.com/sitemap.xml

@@ -18,7 +18,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 PAGES = ["index.html", "services.html", "about.html", "careers.html", "apply.html", "contact.html"]
-LIVE_BASE = "https://jabay7.github.io/btr-freight/"
+LIVE_BASE = "https://btrfreight.com/"
 PDF = "assets/downloads/BTR-Freight-Driver-Application.pdf"
 
 
