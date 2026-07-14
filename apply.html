@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' https://images.unsplash.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; frame-src 'none'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Online Driver Application | BTR Freight Inc.</title>
   <meta name="description" content="Complete BTR Freight's official DOT driver employment application online. Fast, secure, and mobile-friendly — apply to drive in about 15 minutes." />
   <meta name="theme-color" content="#0b1f3a" />
@@ -60,14 +62,8 @@
         </div>
 
         <div class="form-card">
-          <!--
-            Submissions run in friendly "demo mode" until you set an endpoint.
-            Applications are destined for onboarding@btrfreight.com (set the
-            recipient in the Formspree form, then paste its ID into the action).
-            ⚠ This application can collect sensitive data (SSN). Connect a SECURE,
-            privacy-compliant endpoint before going live — see README "Security".
-          -->
           <form action="https://formspree.io/f/REPLACE_FORM_ID" method="POST" data-form data-wizard novalidate>
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" />
 
             <!-- 1. Position -->
             <div class="form-section">

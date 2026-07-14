@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' https://images.unsplash.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; frame-src 'none'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Contact &amp; Request a Quote | BTR Freight Inc.</title>
   <meta name="description" content="Contact BTR Freight Inc. for a fast, no-obligation freight quote. Call 24/7 dispatch or request one online for FTL, LTL, expedited and dedicated freight." />
   <meta name="theme-color" content="#0b1f3a" />
@@ -85,12 +87,8 @@
               <p class="lead" style="font-size:1rem">Share a few details and we'll get back to you fast with transparent pricing. Fields marked <span style="color:#d93838">*</span> are required.</p>
             </div>
 
-            <!--
-              Submissions run in friendly "demo mode" until you set a real
-              endpoint. Replace REPLACE_FORM_ID with your Formspree/Basin ID
-              (or swap in a Google Form embed). See README for the 2-minute setup.
-            -->
             <form action="https://formspree.io/f/REPLACE_FORM_ID" method="POST" data-form novalidate>
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" />
               <div class="form-section" style="margin-bottom:24px">
                 <div class="form-grid cols-2">
                   <div class="field"><label for="name">Full name <span class="req">*</span></label><input id="name" name="Name" type="text" autocomplete="name" required placeholder="Jane Shipper" /></div>

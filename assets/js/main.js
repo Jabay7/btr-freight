@@ -4,6 +4,15 @@
 (function () {
   "use strict";
 
+  /* ---------- Clickjacking guard ----------
+     GitHub Pages can't send X-Frame-Options / frame-ancestors headers, so
+     if this page is ever loaded inside a frame, break out of it. Protects
+     the application form from being wrapped by a malicious site. */
+  if (window.top !== window.self) {
+    try { window.top.location = window.self.location; }
+    catch (e) { document.documentElement.style.display = "none"; }
+  }
+
   /* ---------- Header: solid-on-scroll ---------- */
   const header = document.querySelector(".site-header");
   const isInteriorPage = header && header.classList.contains("solid");

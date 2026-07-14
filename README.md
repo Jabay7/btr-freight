@@ -1,129 +1,37 @@
 # BTR Freight Inc. — Website
 
-A professional, modern, fully responsive marketing site for **BTR Freight Inc.**, a freight
-trucking & logistics company. Built as a fast, self-contained static site (plain HTML, CSS, and
-vanilla JS) — no build step, no dependencies, deploys anywhere.
+Official website for **BTR Freight Inc.**, a freight trucking & logistics company
+serving the lower 48 — company info, services, driver recruitment, and the online
+DOT driver employment application.
 
-## Pages
+Static site: plain HTML, CSS, and vanilla JavaScript. No build step, no dependencies.
 
-| File | Purpose |
+## Structure
+
+| Path | Purpose |
 |------|---------|
-| `index.html` | Home — hero, services overview, why-us, stats, shipper/driver paths, testimonials |
-| `services.html` | Detailed freight services, equipment & coverage, shipping process |
-| `about.html` | Company story, mission/vision/values, safety & compliance |
-| `careers.html` | **Driver recruitment** — benefits, requirements, hiring process; offers 3 ways to apply |
-| `apply.html` | **Full online driver application** — the official DOT employment application as a fillable, e-signed web form |
-| `contact.html` | Contact details + **request-a-quote** form |
+| `index.html` | Home |
+| `services.html` | Freight services |
+| `about.html` | Company & safety/compliance |
+| `careers.html` | Driver recruitment |
+| `apply.html` | Online DOT driver application (multi-step, e-signed) |
+| `contact.html` | Contact + request a quote |
+| `assets/` | CSS, JS, images, downloadable PDF application |
+| `sitemap.xml`, `robots.txt`, `404.html` | SEO & error page |
+| `tests/` | Automated checks (`pytest`) |
 
-Plus `robots.txt`, `sitemap.xml`, a branded `404.html`, JSON-LD structured data
-(Organization + a **JobPosting** so the driver role can appear in Google for Jobs),
-and a `tests/` suite.
+## Local preview
 
 ```
-assets/
-  css/styles.css          Design system (navy + amber, responsive)
-  js/main.js              Nav, scroll effects, counters, FAQ, AJAX form handling
-  img/favicon.svg         Site icon
-  downloads/
-    BTR-Freight-Driver-Application.pdf   Official DOT driver application (downloadable)
+python -m http.server
 ```
 
-## View it locally
-
-Just open `index.html` in a browser. (For forms/fonts to behave exactly like production,
-serve it: `python -m http.server` from this folder, then visit `http://localhost:8000`.)
-
----
-
-## ✅ Before you go live — customize these placeholders
-
-Search/replace across all `.html` files:
-
-| Placeholder | Replace with |
-|-------------|--------------|
-| `(800) 555-0199` and `+18005550199` | Your real phone number |
-| `dispatch@btrfreight.com`, `careers@btrfreight.com` | Your real email addresses |
-| `1234 Logistics Pkwy, Suite 100 / Your City, ST 00000` | Your real address |
-| `USDOT #0000000`, `MC #000000` | Your real USDOT and MC numbers |
-| Stats (`10M+`, `48`, `24/7`, etc.) | Your real numbers (in the `data-count` attributes) |
-| Hero/section photos | Optional — see "Images" below |
-
-> Tip: the testimonials on the home page are illustrative samples. Swap them for real
-> customer/driver quotes when you have them.
-
----
-
-## 📨 Making the forms actually send (2-minute setup)
-
-Both the **driver quick-apply** (`careers.html`) and **request-a-quote** (`contact.html`) forms
-work in friendly **demo mode** out of the box — they show a success message but don't send
-anything until you connect an endpoint. Pick **one** option:
-
-### Option A — Formspree (recommended, no server needed)
-1. Create a free account at <https://formspree.io>, add a form, and copy its endpoint
-   (looks like `https://formspree.io/f/abcwxyz`).
-2. In `careers.html` and `contact.html`, replace `https://formspree.io/f/REPLACE_FORM_ID`
-   with your real endpoint.
-3. Submissions now email you automatically. (Basin and Netlify Forms work the same way.)
-
-### Option B — Google Form (matches the "quick info" form you asked for)
-See **`GOOGLE-FORM-SETUP.md`** for a copy-paste blueprint and two ways to wire it into the site.
-
-### ⚠ Security — the full online application (`apply.html`)
-The full application can collect sensitive data (date of birth, optional SSN). A basic
-Formspree endpoint emails this in plaintext, which is **not ideal for SSNs**. Before
-collecting sensitive data online, use a privacy-compliant pipeline — e.g. Formspree with
-encryption, a dedicated DQF/onboarding provider (Tenstreet, DriverReach, Foley), or your own
-HTTPS backend. The form already marks SSN optional and notes it's verified securely at hire.
-
-## Run the tests
-
-```bash
-uv run --with pytest pytest -q              # full suite (incl. live site checks)
-uv run --with pytest pytest -q -m "not live"   # static checks only (offline)
-```
-The `tests/` suite validates page structure, that every internal link/asset resolves, the PDF
-download, form wiring, SEO files, valid JSON-LD, and that the deployed site serves current content.
-
----
-
-## 🚀 Deploy (free, via GitHub Pages)
-
-Same workflow as a typical static site:
-
-```bash
-cd C:/Users/Yousi/BTR
-git add -A
-git commit -m "Launch BTR Freight website"
-# create a repo on github.com, then:
-git remote add origin https://github.com/<you>/btr-freight.git
-git branch -M main
-git push -u origin main
-```
-
-In the GitHub repo: **Settings ▸ Pages ▸ Build and deployment ▸ Deploy from a branch ▸
-`main` / `root`**. Your site goes live at `https://<you>.github.io/btr-freight/`.
-You can later point a custom domain (e.g. `btrfreight.com`) at it under the same Pages settings.
-
----
-
-## Branding & images
-
-The header and footer use the official logo at `assets/img/BTR-OFF.png` (shown on a small white
-"chip" so it stays legible on the dark header and navy footer). To swap the logo, replace that file
-and update the `width`/`height` on the `.brand-logo` `<img>` tags if the new aspect ratio differs.
-The small browser/tab favicon is the crisp vector at `assets/img/favicon.svg` — kept separate because
-a detailed logo with text isn't legible at 16px.
-
-Hero and section photos load from Unsplash CDN URLs. Each sits over a navy gradient, so the
-layout still looks right even if an image is slow or blocked. To use your own photography,
-replace the `https://images.unsplash.com/...` URLs in `index.html`, `services.html`,
-`about.html`, and the `.path-*` / `.hero` rules in `assets/css/styles.css`.
+Then open <http://localhost:8000>.
 
 ## Notes
 
-- Accessible: skip links, ARIA labels, visible keyboard focus, keyboard-friendly nav & accordion, reduced-motion support.
-- SEO: per-page titles, meta descriptions, Open Graph + Twitter cards on every page, canonical URLs, sitemap, JSON-LD.
-- Conversion touches (no markup needed — added automatically by `main.js`): a sticky **Call / Get-a-Quote** bar on phones, a **back-to-top** button on every page, and smooth anchored scrolling that clears the fixed header. The phone number in the mobile bar is read from the header link, so you only update it once.
-- Forward-looking date fields (pickup / start dates) can't be set in the past.
-- No tracking or third-party scripts beyond Google Fonts and (optional) your chosen form service.
+- Form submissions are handled by a hosted form endpoint. The driver application
+  collects sensitive personal data (SSN) — it must only ever be wired to a
+  secure, privacy-compliant endpoint over HTTPS.
+- Security: the site sets a Content-Security-Policy, referrer policy, a
+  clickjacking guard, and form spam honeypots. HTTPS is enforced in hosting.

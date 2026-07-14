@@ -1,0 +1,5 @@
+# Publish only the website. Keep developer files out of the public build.
+exclude:
+  - README.md
+  - pytest.ini
+  - tests
