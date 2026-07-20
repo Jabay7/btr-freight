@@ -404,3 +404,41 @@ def test_card_images_keep_their_aspect_ratio():
 
     sized = re.findall(r'<img[^>]*\bwidth="(\d+)"[^>]*\bheight="(\d+)"', html)
     assert sized, "expected the card's images to declare intrinsic dimensions"
+
+
+def test_wallet_pass_is_signed_and_intact():
+    """The .pkpass is a real signed bundle, not a renamed zip.
+
+    Apple rejects a pass whose manifest hashes don't match its files, and the
+    bundle is immutable once signed — so this checks the artifact itself rather
+    than trusting that whatever produced it did the right thing.
+    """
+    import hashlib
+    import zipfile
+
+    pkpass = CARD / "btr-freight.pkpass"
+    assert pkpass.exists(), "card/btr-freight.pkpass missing"
+
+    with zipfile.ZipFile(pkpass) as z:
+        names = set(z.namelist())
+        assert {"pass.json", "manifest.json", "signature", "icon.png"} <= names, \
+            f"pass bundle is missing required members: {names}"
+
+        manifest = json.loads(z.read("manifest.json"))
+        for name, expected in manifest.items():
+            assert hashlib.sha1(z.read(name)).hexdigest() == expected, \
+                f"{name} does not match its manifest hash"
+        uncovered = names - set(manifest) - {"manifest.json", "signature"}
+        assert not uncovered, f"files in the bundle escape the manifest: {uncovered}"
+
+        assert len(z.read("signature")) > 1000, "signature looks truncated"
+        p = json.loads(z.read("pass.json"))
+
+    assert p["barcodes"][0]["message"] == APPLY_URL, "pass QR points somewhere else"
+    assert p["logoText"] == "BTR FREIGHT INC"
+
+
+def test_card_page_offers_the_wallet_pass():
+    html = (CARD / "index.html").read_text(encoding="utf-8")
+    assert re.search(r'href="btr-freight\.pkpass"', html), \
+        "card page should link the Wallet pass now that a signed one exists"

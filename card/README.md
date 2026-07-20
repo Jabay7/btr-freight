@@ -17,10 +17,12 @@ a URL, no landing page in between.
 | `logo-mark.png` | The site logo (`assets/img/BTR-OFF.png`) inverted to white line art on transparent, 2x, so it reads on the navy card. |
 | `emblem.png` | Just the circular truck emblem, square and white on transparent — QR badge, Wallet icon, share preview. |
 | `btr-freight.vcf` | The contact file the "Save Our Contact" button hands over, with the emblem as the contact photo. |
-| `wallet/` | Apple Wallet pass sources — the full `pass.json` bundle, a copy-paste recipe, a signing script. Not built yet; see [`wallet/README.md`](wallet/README.md). |
+| `btr-freight.pkpass` | The live Apple Wallet pass, signed by WalletWallet. Not built by `build.py` — see [`wallet/README.md`](wallet/README.md). |
+| `wallet/` | Apple Wallet pass sources — the full `pass.json` bundle, a copy-paste recipe, a signing script. |
 | `build.py` | Regenerates every image, both QR codes and the `.vcf`. |
 
-Everything except `index.html`, `build.py` and the READMEs is **generated**. To change the
+Everything except `index.html`, `btr-freight.pkpass`, `build.py` and the READMEs is
+**generated**. To change the
 phone number, the QR target, or the artwork, edit `build.py` and `index.html`, then:
 
 ```bash

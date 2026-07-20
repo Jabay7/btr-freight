@@ -16,6 +16,7 @@ Outputs (all regenerable, safe to delete):
 """
 
 import base64
+import json
 import io
 import os
 
@@ -139,6 +140,50 @@ for name, pt, art in (("icon", 29, white_emblem), ("logo", 50, white_logo)):
         assert w <= 160 * scale, f"{name}{suffix} is {w}px wide, past Apple's cap"
         art.resize((w, h), Image.LANCZOS) \
            .save(os.path.join(PASS_DIR, f"{name}{suffix}.png"), optimize=True)
+
+
+# -------------------------------------------------- apple wallet bundle check
+# Apple rejects a malformed pass at install time with no useful diagnostic, and
+# by then it has already been signed — so the cheap checks happen here instead,
+# before anyone spends a signing round-trip on it.
+print("· checking the Wallet bundle")
+with open(os.path.join(PASS_DIR, "pass.json"), encoding="utf-8") as f:
+    pass_json = json.load(f)
+
+REQUIRED_KEYS = {"description", "formatVersion", "organizationName",
+                 "passTypeIdentifier", "serialNumber", "teamIdentifier"}
+STYLES = ("boardingPass", "coupon", "eventTicket", "generic", "storeCard")
+
+problems = []
+missing = REQUIRED_KEYS - pass_json.keys()
+if missing:
+    problems.append(f"pass.json is missing required key(s): {sorted(missing)}")
+
+styles = [k for k in STYLES if k in pass_json]
+if len(styles) != 1:
+    problems.append(f"pass.json needs exactly one style key, found {styles}")
+else:
+    # Field keys identify a field to Wallet; duplicates make it drop one silently.
+    keys = [f["key"] for group in pass_json[styles[0]].values() for f in group]
+    dupes = sorted({k for k in keys if keys.count(k) > 1})
+    if dupes:
+        problems.append(f"duplicate field keys in pass.json: {dupes}")
+
+# icon.png is the one image Apple actually requires — without it a pass that is
+# otherwise perfect still refuses to install.
+for required_img in ("icon.png", "icon@2x.png", "logo.png"):
+    if not os.path.exists(os.path.join(PASS_DIR, required_img)):
+        problems.append(f"missing pass image {required_img}")
+
+for code in pass_json.get("barcodes", []):
+    if code["message"] != APPLY_URL:
+        problems.append(f"barcode points at {code['message']}, not {APPLY_URL}")
+
+if problems:
+    raise SystemExit("  pass bundle invalid:\n" + "\n".join("   ✗ " + p for p in problems))
+print(f"  pass.json OK · {len(pass_json[styles[0]])} field groups · barcode -> apply.html")
+if "REPLACE" in pass_json["passTypeIdentifier"] + pass_json["teamIdentifier"]:
+    print("  note: Apple identifiers are still placeholders — see wallet/README.md")
 
 
 # ------------------------------------------------------------------ QR
