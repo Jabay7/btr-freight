@@ -181,7 +181,6 @@
       text-wrap: balance;
     }
     .scan .note b { color: #dbe6f2; font-weight: 600; }
-    .scan .wallet { color: var(--amber); border-bottom: 1px solid var(--line); padding-bottom: 1px; }
 
     /* ---------------- actions ---------------- */
     .actions { display: grid; gap: .6rem; }
@@ -319,9 +318,6 @@
            driver goes from camera to the first question in one step. -->
       <img class="qr" src="qr.png" alt="QR code that opens the BTR Freight driver application" width="208" height="208" />
       <p class="note">Point any phone camera here. <b>About 15 minutes</b>, signed online — no printing.</p>
-      <!-- iOS hands .pkpass straight to Wallet; everything else just downloads
-           a file, so this stays a quiet secondary link rather than a button. -->
-      <p class="note"><a class="wallet" href="btr-freight.pkpass">Add this card to Apple Wallet</a></p>
     </section>
 
     <nav class="actions">
@@ -346,6 +342,16 @@
       <a class="btn" href="btr-freight.vcf" download="BTR-Freight-Recruiting.vcf">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
         <span><b>Save Our Contact</b><small>Recruiting line, email &amp; address</small></span>
+      </a>
+
+      <!-- No `download` attribute here, unlike the .vcf above: iOS only hands a
+           .pkpass to Wallet when it navigates to it, and `download` would force
+           a file save instead — the one behaviour this button exists to avoid.
+           The sub-label says iPhone because there's no JS on this page to
+           detect the platform, and on anything else this is just a file. -->
+      <a class="btn" href="btr-freight.pkpass">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/><path d="M16 15h3"/></svg>
+        <span><b>Add to Apple Wallet</b><small>iPhone — the QR, always in your Wallet</small></span>
       </a>
 
       <a class="btn" href="mailto:onboarding@btrfreight.com">
