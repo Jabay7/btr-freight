@@ -388,3 +388,19 @@ def test_card_is_noindex():
     """A hand-out card shouldn't compete with careers.html in search."""
     html = (CARD / "index.html").read_text(encoding="utf-8")
     assert 'name="robots" content="noindex' in html
+
+
+def test_card_images_keep_their_aspect_ratio():
+    """Every card image carries width/height attrs, so the reset needs height:auto.
+
+    Those attributes are presentational hints that reserve space during load.
+    A CSS `width` overrides the width hint but leaves the height hint standing,
+    which stretched the logo to its full 348px inside a 218px box until the
+    reset was fixed.
+    """
+    html = (CARD / "index.html").read_text(encoding="utf-8")
+    reset = re.search(r"^\s*img \{([^}]*)\}", html, re.M).group(1)
+    assert "height: auto" in reset, "card/index.html img reset is missing height:auto"
+
+    sized = re.findall(r'<img[^>]*\bwidth="(\d+)"[^>]*\bheight="(\d+)"', html)
+    assert sized, "expected the card's images to declare intrinsic dimensions"

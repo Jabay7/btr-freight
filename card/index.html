@@ -47,7 +47,12 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    img { max-width: 100%; display: block; }
+    /* height:auto is load-bearing, not boilerplate. Every img here carries
+       width/height attributes so the layout doesn't jump while they load, but
+       those are presentational hints: CSS width overrides the width attribute
+       while the height attribute still applies, which renders the logo at its
+       full 348px height inside a 218px box. */
+    img { max-width: 100%; height: auto; display: block; }
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
     :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
@@ -288,7 +293,7 @@
     <header>
       <img class="logo" src="logo-mark.png" alt="BTR Freight Inc. — since 2020" width="506" height="348" />
       <p class="kicker">Now Hiring · CDL-A</p>
-      <h1 class="headline">Your next driving home</h1>
+      <h1 class="headline">Drive with BTR</h1>
       <p class="tagline">Competitive pay, steady miles, modern equipment, and home time we actually keep.</p>
 
       <div class="badges">
