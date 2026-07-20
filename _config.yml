@@ -3,3 +3,8 @@ exclude:
   - README.md
   - pytest.ini
   - tests
+  # Digital recruiting card: the page and its generated images ship, but the
+  # generator, the docs and the unsigned Wallet bundle are sources, not pages.
+  - card/README.md
+  - card/build.py
+  - card/wallet

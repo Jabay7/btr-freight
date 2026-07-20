@@ -1,0 +1,99 @@
+{
+  "formatVersion": 1,
+  "passTypeIdentifier": "pass.REPLACE.WITH.YOUR.PASS.TYPE.ID",
+  "teamIdentifier": "REPLACE_TEAM_ID",
+  "organizationName": "BTR Freight Inc.",
+  "description": "BTR Freight Inc. — driver recruiting card",
+  "logoText": "BTR FREIGHT INC",
+  "foregroundColor": "rgb(255, 255, 255)",
+  "backgroundColor": "rgb(11, 31, 58)",
+  "labelColor": "rgb(245, 166, 35)",
+  "sharingProhibited": false,
+  "generic": {
+    "primaryFields": [
+      {
+        "key": "hiring",
+        "label": "NOW HIRING",
+        "value": "CDL-A Drivers"
+      }
+    ],
+    "secondaryFields": [
+      {
+        "key": "phone",
+        "label": "CALL OR TEXT RECRUITING",
+        "value": "(224) 477-5782"
+      },
+      {
+        "key": "where",
+        "label": "RUNNING",
+        "value": "Lower 48"
+      }
+    ],
+    "auxiliaryFields": [
+      {
+        "key": "email",
+        "label": "ONBOARDING",
+        "value": "onboarding@btrfreight.com"
+      },
+      {
+        "key": "site",
+        "label": "WEBSITE",
+        "value": "jabay7.github.io/btr-freight"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "apply",
+        "label": "Apply online",
+        "value": "https://jabay7.github.io/btr-freight/apply.html",
+        "attributedValue": "<a href=\"https://jabay7.github.io/btr-freight/apply.html\">Open the DOT driver application</a>  —  about 15 minutes, signed online, no printing."
+      },
+      {
+        "key": "callback",
+        "label": "Recruiting",
+        "value": "(224) 477-5782",
+        "attributedValue": "<a href=\"tel:+12244775782\">(224) 477-5782</a>  ·  call or text"
+      },
+      {
+        "key": "mail",
+        "label": "Email",
+        "value": "onboarding@btrfreight.com",
+        "attributedValue": "<a href=\"mailto:onboarding@btrfreight.com\">onboarding@btrfreight.com</a>"
+      },
+      {
+        "key": "web",
+        "label": "Website",
+        "value": "https://jabay7.github.io/btr-freight/",
+        "attributedValue": "<a href=\"https://jabay7.github.io/btr-freight/\">Pay, lanes, home time & driver FAQs</a>"
+      },
+      {
+        "key": "why",
+        "label": "Why drive with BTR",
+        "value": "•  Competitive, on-time pay — with detention, layover and stop pay\n•  Consistent miles from a steady freight base\n•  Real home time — regional and dedicated lanes\n•  Late-model, well-maintained equipment\n•  24/7 dispatch from people who know your name"
+      },
+      {
+        "key": "qualify",
+        "label": "What you'll need to qualify",
+        "value": "•  Valid Class A CDL in good standing\n•  3 years verifiable DOT-regulated tractor-trailer experience\n•  Complete, verifiable 10-year employment history\n•  Acceptable MVR with no serious or recent disqualifying violations\n•  At least 23 years of age and eligible to work in the U.S.\n•  Able to pass a DOT physical and drug screen"
+      },
+      {
+        "key": "process",
+        "label": "The hiring process",
+        "value": "1.  Apply online — about 15 minutes\n2.  A recruiter calls, usually within one to two business days\n3.  Employment verification and DOT screening (MVR, PSP, drug test)\n4.  Orientation, onboarding, and you're on the road"
+      },
+      {
+        "key": "address",
+        "label": "BTR Freight Inc.",
+        "value": "4728 Oakton St, Unit 208\nSkokie, IL 60076\n\nEqual Opportunity Employer — safety-first since day one."
+      }
+    ]
+  },
+  "barcodes": [
+    {
+      "format": "PKBarcodeFormatQR",
+      "message": "https://jabay7.github.io/btr-freight/apply.html",
+      "messageEncoding": "iso-8859-1",
+      "altText": "Scan to apply  ·  BTR Freight Inc."
+    }
+  ]
+}

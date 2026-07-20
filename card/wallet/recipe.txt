@@ -1,0 +1,87 @@
+BTR FREIGHT INC — APPLE WALLET RECRUITING CARD
+Copy-paste sheet for building the pass at https://walletwallet.alen.ro/
+Do it ON YOUR IPHONE in Safari so the finished pass drops straight into Wallet.
+==========================================================================
+
+Barcode format:   QR
+Barcode data:     https://jabay7.github.io/btr-freight/apply.html
+
+Title:            BTR FREIGHT INC
+Card color:       #0B1F3A        (brand navy)
+Text color:       #FFFFFF
+Label color:      #F5A623        (brand amber, if the tool offers it)
+
+Logo image:       open this on the phone, long-press, "Add to Photos", then upload it —
+                  https://raw.githubusercontent.com/Jabay7/btr-freight/main/card/logo-mark.png
+
+--------------------------------------------------------------------------
+FRONT FIELDS
+--------------------------------------------------------------------------
+
+Field 1
+  label:  NOW HIRING
+  value:  CDL-A Drivers
+
+Field 2
+  label:  CALL OR TEXT RECRUITING
+  value:  (224) 477-5782
+
+Field 3
+  label:  RUNNING
+  value:  Lower 48
+
+Field 4
+  label:  ONBOARDING
+  value:  onboarding@btrfreight.com
+
+Field 5
+  label:  WEBSITE
+  value:  jabay7.github.io/btr-freight
+
+--------------------------------------------------------------------------
+BACK FIELDS  (add whichever the tool gives you room for)
+--------------------------------------------------------------------------
+
+Apply online
+  https://jabay7.github.io/btr-freight/apply.html
+  About 15 minutes, signed online, no printing.
+
+Recruiting
+  (224) 477-5782  ·  call or text
+
+Email
+  onboarding@btrfreight.com
+
+Website
+  https://jabay7.github.io/btr-freight/
+
+Why drive with BTR
+  Competitive, on-time pay — with detention, layover and stop pay
+  Consistent miles from a steady freight base
+  Real home time — regional and dedicated lanes
+  Late-model, well-maintained equipment
+  24/7 dispatch from people who know your name
+
+What you'll need to qualify
+  Valid Class A CDL in good standing
+  3 years verifiable DOT-regulated tractor-trailer experience
+  Complete, verifiable 10-year employment history
+  Acceptable MVR with no serious or recent disqualifying violations
+  At least 23 years of age and eligible to work in the U.S.
+  Able to pass a DOT physical and drug screen
+
+The hiring process
+  1. Apply online — about 15 minutes
+  2. A recruiter calls, usually within one to two business days
+  3. Employment verification and DOT screening (MVR, PSP, drug test)
+  4. Orientation, onboarding, and you're on the road
+
+BTR Freight Inc.
+  4728 Oakton St, Unit 208, Skokie, IL 60076
+  Equal Opportunity Employer — safety-first since day one.
+
+--------------------------------------------------------------------------
+Then tap "Download Apple pass" and choose Add.
+
+The QR on the pass goes straight to the driver application — a driver points
+their camera at your Wallet screen and starts filling it out on their own phone.

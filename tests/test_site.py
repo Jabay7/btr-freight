@@ -324,3 +324,67 @@ def test_live_serves_current_content(live_ok):
     _, html = _fetch(LIVE_BASE)
     assert "$5M" in html, "live home not serving $5M coverage yet"
     assert "98%" not in html, "live home still shows 98% stat"
+
+
+# --------------------------------------------------------------------------- #
+# Digital recruiting card (card/)
+# --------------------------------------------------------------------------- #
+CARD = ROOT / "card"
+APPLY_URL = LIVE_BASE + "apply.html"
+
+
+def test_card_assets_present():
+    """Everything index.html and the Wallet bundle reference is generated."""
+    for f in ("index.html", "qr.png", "qr-print.png", "logo-mark.png",
+              "emblem.png", "btr-freight.vcf", "build.py"):
+        p = CARD / f
+        assert p.exists() and p.stat().st_size > 500, f"card/{f} missing or stub"
+    for f in ("icon.png", "icon@2x.png", "icon@3x.png",
+              "logo.png", "logo@2x.png", "logo@3x.png", "pass.json"):
+        assert (CARD / "wallet" / "BTRCard.pass" / f).exists(), f"wallet asset {f} missing"
+
+
+def test_card_qr_targets_the_application_everywhere():
+    """The whole point of the card: every code and copy sheet aims at apply.html.
+
+    A printed QR can't be corrected after the fact, so a drifting URL here is
+    the one defect in this folder that costs real money.
+    """
+    pass_json = (CARD / "wallet" / "BTRCard.pass" / "pass.json").read_text(encoding="utf-8")
+    recipe = (CARD / "wallet" / "recipe.txt").read_text(encoding="utf-8")
+    for name, src in (("wallet/BTRCard.pass/pass.json", pass_json), ("wallet/recipe.txt", recipe)):
+        assert APPLY_URL in src, f"card/{name} does not point at {APPLY_URL}"
+
+    # build.py composes the target from SITE_URL, so check what it resolves to
+    # rather than looking for the literal.
+    build = (CARD / "build.py").read_text(encoding="utf-8")
+    site = re.search(r'^SITE_URL = "([^"]+)"', build, re.M).group(1)
+    apply_expr = re.search(r'^APPLY_URL = SITE_URL \+ "([^"]+)"', build, re.M).group(1)
+    assert site + apply_expr == APPLY_URL, "build.py builds a different QR target"
+
+    barcode = json.loads(pass_json)["barcodes"][0]
+    assert barcode["message"] == APPLY_URL
+    assert barcode["format"] == "PKBarcodeFormatQR"
+
+
+def test_card_page_links_resolve():
+    html = (CARD / "index.html").read_text(encoding="utf-8")
+    html = re.sub(r"(?s)<!--.*?-->", "", html)          # skip the parked Wallet link
+    for ref in re.findall(r'(?:href|src)="([^"#]+)"', html):
+        if ref.startswith(("http", "mailto:", "tel:", "sms:", "data:")):
+            continue
+        assert (CARD / ref).resolve().exists(), f"card/index.html -> {ref} is broken"
+
+
+def test_card_generated_files_are_not_published():
+    """Sources stay out of the Jekyll build; the page and its images ship."""
+    cfg = (ROOT / "_config.yml").read_text(encoding="utf-8")
+    for excluded in ("card/build.py", "card/README.md", "card/wallet"):
+        assert excluded in cfg, f"_config.yml should exclude {excluded}"
+    assert "card/index.html" not in cfg, "the card page itself must be published"
+
+
+def test_card_is_noindex():
+    """A hand-out card shouldn't compete with careers.html in search."""
+    html = (CARD / "index.html").read_text(encoding="utf-8")
+    assert 'name="robots" content="noindex' in html
